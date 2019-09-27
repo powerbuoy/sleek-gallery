@@ -1,0 +1,2 @@
+<?php
+namespace Sleek\Gallery;
