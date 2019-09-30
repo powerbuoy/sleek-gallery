@@ -77,3 +77,7 @@ add_filter('post_gallery', function ($string, $attr) {
 
 	return $html;
 }, 10, 2);
+
+###################################################
+# Wrap all images in the_content in figure elements
+# TODO
