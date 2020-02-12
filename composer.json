@@ -9,5 +9,8 @@
     ],
     "autoload": {
         "files": ["sleek-gallery.php"]
+    },
+    "require": {
+        "powerbuoy/sleek-utils": "^1.0.0"
     }
 }
