@@ -1,0 +1,12 @@
+figure.video-embed {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+figure.video-embed div.thumbnail {
+	display: none !important;
+}
+
+figure.video-embed figcaption {
+	display: none !important;
+}
