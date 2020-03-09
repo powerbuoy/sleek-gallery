@@ -1,5 +1,6 @@
 {
     "name": "powerbuoy/sleek-gallery",
+    "description": "Improves media and gallery related output like the default gallery markup, wraps captioned images in figure/figcaption, removes gallery CSS and more.",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
