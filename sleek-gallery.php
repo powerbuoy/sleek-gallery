@@ -20,7 +20,7 @@ add_filter('img_caption_shortcode', function ($empty, $atts, $content) {
 
 	$html = '<figure class="' . esc_attr($atts['align']) . '">';
 	$html .= do_shortcode($content);
-	$html .= '<figcaption>' . esc_attr($atts['caption']) . '</ficaption>';
+	$html .= '<figcaption>' . $atts['caption'] . '</ficaption>';
 	$html .= '</figure>';
 
 	return $html;
