@@ -4,6 +4,18 @@ namespace Sleek\Oembed;
 ####################
 # Nicer video embeds
 add_action('after_setup_theme', function () {
+	# Just responsive video (div.video around iframe)
+	if (get_theme_support('sleek/oembed/responsive_video') and !(get_theme_support('sleek/oembed/youtube') or get_theme_support('sleek/oembed/vimeo'))) {
+		add_filter('oembed_dataparse', function ($return, $data, $url) {
+			if (strtolower($data->provider_name) === 'youtube' or strtolower($data->provider_name) === 'vimeo') {
+				return '<div class="video">' . $return . '</div>';
+			}
+
+			return $return;
+		});
+	}
+
+	# With API
 	if (get_theme_support('sleek/oembed/youtube') or get_theme_support('sleek/oembed/vimeo')) {
 		# Wrap oembeds in figure with thumbnail and title
 		# NOTE: This is cached by WP
