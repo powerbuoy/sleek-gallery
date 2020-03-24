@@ -5,9 +5,12 @@ namespace Sleek\Oembed;
 # Nicer video embeds
 add_action('after_setup_theme', function () {
 	# Just responsive video (div.video around iframe)
-	if (get_theme_support('sleek/oembed/responsive_video') and !(get_theme_support('sleek/oembed/youtube') or get_theme_support('sleek/oembed/vimeo'))) {
+	if (get_theme_support('sleek/oembed/responsive_video')) {
 		add_filter('oembed_dataparse', function ($return, $data, $url) {
-			if (strtolower($data->provider_name) === 'youtube' or strtolower($data->provider_name) === 'vimeo') {
+			if (
+				(strtolower($data->provider_name) === 'youtube' and !get_theme_support('sleek/oembed/youtube')) or
+				(strtolower($data->provider_name) === 'vimeo' and !get_theme_support('sleek/oembed/vimeo'))
+			) {
 				return '<div class="video">' . $return . '</div>';
 			}
 
@@ -82,7 +85,8 @@ add_action('after_setup_theme', function () {
 						document.querySelectorAll('figure.video-embed--youtube').forEach(function (el) {
 							var iframe = el.querySelector('iframe');
 							var thumbnail = el.querySelector('.thumbnail');
-							var player = new YT.Player(iframe, {
+
+							iframe.sleekYTPlayer = new YT.Player(iframe, {
 								events: {
 									onReady: function (e) {
 										el.classList.add('video-embed--state-' + (states[e.data] || 'unknown'));
@@ -113,7 +117,8 @@ add_action('after_setup_theme', function () {
 					document.querySelectorAll('figure.video-embed--vimeo').forEach(function (el) {
 						var iframe = el.querySelector('iframe');
 						var thumbnail = el.querySelector('.thumbnail');
-						var player = new Vimeo.Player(iframe);
+
+						iframe.sleekVimeoPlayer = new Vimeo.Player(iframe);
 
 						player.on('play', function () {
 							el.classList.add('video-embed--state-playing');
