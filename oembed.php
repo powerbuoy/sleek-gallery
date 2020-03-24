@@ -15,7 +15,7 @@ add_action('after_setup_theme', function () {
 			}
 
 			return $return;
-		});
+		}, 10, 3);
 	}
 
 	# With API
