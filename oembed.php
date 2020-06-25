@@ -20,12 +20,18 @@ add_action('after_setup_theme', function () {
 		unset($data->html);
 
 		$args = [];
+		$atts = [
+			'loading="lazy"',
+			'data-oembed-url="' . $url . '"',
+			"data-oembed='" . json_encode($data) . "'"
+		];
 
-		if ($data->provider_name === 'youtube') {
+		if ($data->provider_name === 'YouTube') {
 			$args['enablejsapi'] = 1;
+			$atts[] = 'data-youtube-id="' . \Sleek\Utils\get_youtube_id($return) . '"';
 		}
 
-		$return = \Sleek\Utils\add_iframe_args($return, $args, "data-oembed='" . json_encode($data) . "' data-oembed-url=\"$url\"");
+		$return = \Sleek\Utils\add_iframe_args($return, $args, implode(' ', $atts));
 
 		return $return;
 	}, 10, 3);
