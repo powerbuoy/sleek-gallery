@@ -23,7 +23,7 @@ add_action('after_setup_theme', function () {
 		$atts = [
 			'loading="lazy"',
 			'data-oembed-url="' . $url . '"',
-			"data-oembed='" . json_encode($data) . "'"
+			"data-oembed='" . json_encode($data, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_APOS) . "'"
 		];
 
 		if ($data->provider_name === 'YouTube') {
