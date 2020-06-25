@@ -10,13 +10,13 @@ Improves media and gallery related output like the default gallery markup, wraps
 
 ## Theme Support
 
-### `sleek/oembed/youtube` and `sleek/oembed/vimeo`
+### `sleek/oembed/responsive_video`
 
-Wraps YouTube and/or Vimeo embeds in a figure with thumbnail and caption, also uses their respective APIs so that clicking the thumbnail plays or pauses the video.
+Wraps videos in a `div.video` element which, with SleekUI, creates responsive videos.
 
 ### `sleek/gallery/slideshow`
 
-Create slideshows instead of galleries. The number of columns selected for the gallery will be the number of slides per page. Requires SleekUI.
+Create slideshows instead of galleries. Requires SleekUI.
 
 ## Hooks
 

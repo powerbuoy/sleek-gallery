@@ -47,7 +47,7 @@ add_filter('post_gallery', function ($string, $attr) {
 
 	# Make galleries into slideshows
 	if (get_theme_support('sleek/gallery/slideshow')) {
-		$html = '<div class="gallery" data-slideshow=\'{"perView": "' . $attr['columns'] . '"}\'>';
+		$html = '<div class="gallery" data-slideshow>';
 	}
 	# Just regular galleries
 	else {
