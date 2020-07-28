@@ -7,7 +7,11 @@ add_action('after_setup_theme', function () {
 	# Just responsive video (div.video around iframe)
 	if (get_theme_support('sleek/oembed/responsive_video')) {
 		add_filter('embed_oembed_html', function($html) {
-			return '<div class="video">' . $html . '</div>';
+			if ($html) {
+				return '<div class="video">' . $html . '</div>';
+			}
+
+			return $html;
 		}, 99, 1);
 
 		add_filter('acf/format_value/type=oembed', function ($value) {
