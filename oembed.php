@@ -18,6 +18,10 @@ add_action('after_setup_theme', function () {
 	# Replace src with data-src
 	if (get_theme_support('sleek/oembed/data_src')) {
 		add_filter('embed_oembed_html', function ($html) {
+			if (is_admin()) {
+				return $html;
+			}
+
 			return str_replace('src="', 'data-src="', $html);
 		});
 	}
