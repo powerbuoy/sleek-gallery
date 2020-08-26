@@ -6,18 +6,26 @@ namespace Sleek\Oembed;
 add_action('after_setup_theme', function () {
 	# Just responsive video (div.video around iframe)
 	if (get_theme_support('sleek/oembed/responsive_video')) {
-		add_filter('embed_oembed_html', function($html) {
+		add_filter('embed_oembed_html', function ($html) {
 			if ($html) {
 				return '<div class="video">' . $html . '</div>';
 			}
 
 			return $html;
 		}, 99, 1);
-
-		add_filter('acf/format_value/type=oembed', function ($value) {
-			return apply_filters('embed_oembed_html', $value);
-		}, 99, 1);
 	}
+
+	# Replace src with data-src
+	if (get_theme_support('sleek/oembed/data_src')) {
+		add_filter('embed_oembed_html', function ($html) {
+			return str_replace('src="', 'data-src="', $html);
+		});
+	}
+
+	# Make sure ACF video runs through the WP filter
+	add_filter('acf/format_value/type=oembed', function ($value) {
+		return apply_filters('embed_oembed_html', $value);
+	}, 99, 1);
 
 	# Store oembed data on the iframe and enable YouTube JS API
 	add_filter('oembed_dataparse', function ($return, $data, $url) {
