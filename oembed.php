@@ -5,14 +5,22 @@ namespace Sleek\Oembed;
 # Nicer video embeds
 add_action('after_setup_theme', function () {
 	# Just responsive video (div.video around iframe)
-	if (get_theme_support('sleek/oembed/responsive_video')) {
-		add_filter('embed_oembed_html', function ($html) {
+	# NOTE: Make sure the embed is for youtube/vimeo
+	$tsVideoEmbedSources = get_theme_support('sleek/oembed/responsive_video');
+	$videoEmbedSources = is_array($tsVideoEmbedSources) ? $tsVideoEmbedSources : ['vimeo.com', 'youtube.com'];
+
+	if ($tsVideoEmbedSources) {
+		add_filter('embed_oembed_html', function ($html, $url) {
 			if ($html) {
-				return '<div class="video">' . $html . '</div>';
+				foreach ($videoEmbedSources as $source) {
+					if (strpos($url, $source) !== false) {
+						return '<div class="video">' . $html . '</div>';
+					}
+				}
 			}
 
 			return $html;
-		}, 99, 1);
+		}, 99, 2);
 	}
 
 	# Replace src with data-src
