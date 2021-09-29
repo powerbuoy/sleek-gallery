@@ -10,7 +10,7 @@ add_action('after_setup_theme', function () {
 	$videoEmbedSources = is_array($tsVideoEmbedSources) ? $tsVideoEmbedSources : ['vimeo.com', 'youtube.com'];
 
 	if ($tsVideoEmbedSources) {
-		add_filter('embed_oembed_html', function ($html, $url) {
+		add_filter('embed_oembed_html', function ($html, $url) use ($videoEmbedSources) {
 			if ($html) {
 				foreach ($videoEmbedSources as $source) {
 					if (strpos($url, $source) !== false) {
