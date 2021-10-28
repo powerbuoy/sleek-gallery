@@ -36,7 +36,11 @@ add_action('after_setup_theme', function () {
 
 	# Make sure ACF video runs through the WP filter
 	add_filter('acf/format_value/type=oembed', function ($value) {
-		return apply_filters('embed_oembed_html', $value);
+		if (preg_match('/src="(.*?)"/', $value, $matches)) {
+			return apply_filters('embed_oembed_html', $value, $matches[1]);
+		}
+
+		return $value;
 	}, 99, 1);
 
 	# Store oembed data on the iframe and enable YouTube JS API
